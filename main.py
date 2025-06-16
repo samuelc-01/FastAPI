@@ -5,6 +5,8 @@ from fastapi import FastAPI
 from models import User, Gender, Role
 
 #py -m uvicorn main:app --reload
+#lh:yourport/docs for swagger
+#lh:yourport/redoc for documation created by swagger
 app = FastAPI()
 
 db: List[User] = [
