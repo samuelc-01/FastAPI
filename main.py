@@ -4,6 +4,7 @@ from fastapi import FastAPI
 
 from models import User, Gender, Role
 
+#py -m uvicorn main:app --reload
 app = FastAPI()
 
 db: List[User] = [
@@ -31,4 +32,8 @@ def root():
 async def fetch_users():
     return db;
 
+@app.post("/api/v1/users")
+async def register_user(user: User):
+    db.append(user)
+    return {"id": user.id}
 # start next commit
