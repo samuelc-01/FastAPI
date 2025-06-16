@@ -1,12 +1,12 @@
 from typing import List
-from uuid import UUID, uuid4
-from fastapi import FastAPI
+from uuid import UUID
+from fastapi import FastAPI, HTTPException
 
 from models import User, Gender, Role
 
 #py -m uvicorn main:app --reload
 #lh:yourport/docs for swagger
-#lh:yourport/redoc for documation created by swagger
+#lh:your    port/redoc for documation created by swagger
 
 app = FastAPI()
 
@@ -47,4 +47,9 @@ async def delete_user(user_id: UUID):
         if user.id == user_id:
             db.remove(user)
             return 
+    raise HTTPException(
+        status_code=404,
+        detail=f"user with id: {user_id} does not exists"
+    )
+
 # start next commit
